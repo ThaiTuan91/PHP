@@ -45,12 +45,12 @@ if(!empty($_POST)){
                 <li class="nav-item">
                     <a href="department.php" class="nav-link">DEPARTMENT</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="employeadd.php" class="nav-link">EMPLOYEE ADD</a>
                 </li>
                 <li class="nav-item">
                     <a href="departmentadd.php" class="nav-link">DEPARTMENT ADD</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>
