@@ -1,35 +1,37 @@
 <?php
+  require_once('dbhelper.php');
+  
 $username= $password= $msg= $them=$remeber= $id ='';
 if(!empty($_POST)){
-    require_once('dbhelper.php');
-    require_once('config.php');
-
-    $username = getPost('username');
-    $password = getPost('password');
-    $them = getPost('them');
-    $remeber = getPost('remember');
-    $id = getPost('id');
-
-    $sql = "select * from user_info where username ='$username' and password = '$password' ";
-   
-    execute($sql);
-
-    if($username != 'admin' || $password != '123456'){
-        echo '<script>alert("LOGIN FAILS -Your password or username is not correctl!!!")</script>';
-    } 
-     else if($username == 'admin' && $password == '123456'){
-        header('Location: e5-manager.php');
-        die();  
+    if(isset($_POST)){
+        $username = getPost('username');
+        $password = getPost('password');
+        $them = getPost('them');
+        $remeber = getPost('remeber');
+        $id = getPost('id');
+    
+        $sql = "select * from user_info where username ='$username' and password = '$password' ";
+       
+        execute($sql);
+    
+        if($username != 'admin' || $password != '123456'){
+            echo '<script>alert("LOGIN FAILS -Your password or username is not correctl!!!")</script>';
+        } 
+         else if($username == 'admin' && $password == '123456'){
+            header('Location: e5-manager.php');
+            die();  
+        }
+       
+    
+        if($remeber == '5'){    
+            setcookie('username', $username, time()+5000, '/');
+            setcookie('password', $password, time()+5000, '/');
+        }else if($remeber == 'forever'){
+            setcookie('username', $username, time()+365*24*60*60, '/');
+            setcookie('password', $password, time()+365*24*60*60, '/');
+        }
     }
-   
-
-    if($remeber == '5'){    
-        setcookie('username', $username, time()+5, '/');
-        setcookie('password', $password, time()+5, '/');
-    }else if($remeber == 'forever'){
-        setcookie('username', $username, time()+365*24*60*60, '/');
-        setcookie('password', $password, time()+365*24*60*60, '/');
-    }
+  
     
 }
 
@@ -53,7 +55,7 @@ if(!empty($_POST)){
     </style>
 
 </head>
-<body>
+<body style = "background-color: <?=$them?>">
     <div class="container">
         <div class="card">
             <div class="card-header text-white bg-info">
@@ -72,8 +74,9 @@ if(!empty($_POST)){
                 </div>
                 <div class="form-group">
                     <label for="">Them: </label>
-                    <input type="radio" name ="them" value ="dark">Dark
-                    <input type="radio" name ="them" value ="light">Light
+                    <label for=""><input type="radio" name ="them" value ="black">Dark</label>
+                    <label for=""><input type="radio" name ="them" value ="white">Light</label>
+                    
                 </div>
                 <div class="form-group">
                     <label for="">Remmber Me for: </label>

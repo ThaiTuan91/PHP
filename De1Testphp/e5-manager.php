@@ -1,7 +1,5 @@
 <?php
   require_once('dbhelper.php');
-  require_once('config.php');
-  
   if(!empty($_POST)){
     $username = getPost('username');
     $password = getPost('password');
@@ -14,9 +12,7 @@
     }
 
     execute($sql);
-    header('Location:e5-list.php');
-    die();
-  }
+}
 
   $id = getGet('id');
   $sql = "select *from user_info where id = '$id' ";
@@ -72,7 +68,41 @@
                 <button class = "btn btn-success">Add New</button>
                 </div>      
                 </form>
-                <a href="e5-list.php">Back to list</a>
+              
+               <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Username</th>
+                            <th style ="width : 60px"></th>
+                            <th style ="width : 60px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                         $sql= "select *from user_info ";
+                         $datalist = executeResult($sql);
+                            $index=0;
+                            foreach($datalist as $item){
+                                echo '<tr>
+                                    <td>'.(++$index).'</td>
+                                    <td>'.$item['username'].'</td>
+                                    <td style ="width : 60px">
+                                    <a href = "e5-manager.php?id ='.$item['id'].'"><button class = "btn btn-warning">Update</button>
+                                    </td>
+                                    <td style ="width : 60px">
+                                    <a href = "delete.php?id ='.$item['id'].'"><button class = "btn btn-danger">Remove</button>
+                                    </td>
+                            </tr>';
+                            }
+                        ?>
+                      
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
                 <a href="e4-login.php">Logout</a>
             </div>
 

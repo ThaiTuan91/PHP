@@ -23,9 +23,6 @@
         die();
     }
 
-  
- 
-
 ?>
 
 <!DOCTYPE html>

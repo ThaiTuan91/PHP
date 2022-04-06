@@ -107,9 +107,13 @@ if($item!=null){
                     </div>
                     <div class="form-group">
                         <label >SEX </label>
-                        <!-- <label for="">Female</label>
-                        <input type="radio" name ="sex" > -->
-                        <input required type="text" class ="form-control" name = "sex" value ="<?=$sex?>">
+                       <label for="">
+                       <input required type="radio" class ="form-control" name = "sex" value ="Female">Female
+                       </label>
+                       <label for="">
+                       <input required type="radio" class ="form-control" name = "sex" value ="Male">Male
+                       </label>
+                        <!-- <input required type="text" class ="form-control" name = "sex" value ="<?=$sex?>"> -->
                     </div>
                     <div class="form-group">
                         <label >DEPARTMENT NAME</label>
